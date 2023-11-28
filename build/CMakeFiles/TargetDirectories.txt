@@ -1,0 +1,10 @@
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/src/CMakeFiles/edit_cache.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/src/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/src/network/CMakeFiles/Network.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/src/network/CMakeFiles/edit_cache.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/src/network/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/app/CMakeFiles/Executable.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/app/CMakeFiles/edit_cache.dir
+/mnt/c/Users/User/Desktop/Repositories/Learning/FeedSimulator/build/app/CMakeFiles/rebuild_cache.dir
