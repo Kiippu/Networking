@@ -63,6 +63,7 @@ int simple_server::Init()
      */
     int optVal = 0;
     int optLen = sizeof(optVal);
+    // setting this is not asvided as other processes can hijack socket
     ret = setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (char const *)&optVal, optLen);
     // ret = setsockopt(sock, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, (char const *)&optVal, optLen);
     if(ret < 0){
@@ -107,6 +108,21 @@ int simple_server::Init()
         {
             // we have communications on our socket do something
             std::cout << "there is data in the sockets!" << std::endl;
+
+            if (FD_ISSET(sock, &m_exception))
+            {
+                /* code */
+            }
+
+            if (FD_ISSET(sock, &m_write))
+            {
+                /* code */
+            }
+
+            if (FD_ISSET(sock, &m_read))
+            {
+                /* code */
+            }
         }
         else if (ret == 0)
         {
@@ -120,6 +136,9 @@ int simple_server::Init()
             std::cout << "we have an error in our socket setup. " << std::endl;
             break;
         }
+        
+
+
         ret = InitSocket(sock);
     }
     
