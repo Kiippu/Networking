@@ -8,3 +8,32 @@
  * @copyright Copyright (c) 2023
  * 
  */
+
+#include <arpa/inet.h>
+
+
+class simple_server
+{
+public:
+    enum Block : u_long{
+        Yes,
+        No
+    };
+private:
+    struct sockaddr_in m_srv;
+    struct timeval m_time_val;
+    fd_set m_read;
+    fd_set m_write;
+    fd_set m_exception;
+    int m_port;
+    Block m_isBlockingSocket;
+public:
+    simple_server(int port, Block isBlocking)
+        : m_port(port), m_time_val{1,0}, m_isBlockingSocket(isBlocking) {};
+
+    int Init();
+
+    int InitSocket(int sock);
+
+    void Send();
+};
