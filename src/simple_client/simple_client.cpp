@@ -44,8 +44,12 @@ int simple_client::Init()
         std::cout << "connection to server has failed" << std::endl;
         return state::FAIL;
     }
-    else
+    else{
         std::cout << "connection to server has succeeded" << std::endl;
+        char buffer[255] = {0,};
+        recv(sock, buffer, 255, 0);
+        std::cout << "data received: \n" << buffer << std::endl;
+    }
 
     return state::SUCCESS;
 }

@@ -10,7 +10,19 @@
  */
 
 #include <arpa/inet.h>
+#include <map>
+#include <iostream>
 
+struct client_connection
+{
+    bool m_in_active;
+    void print()
+    {
+        std::cout << "socket: ##" //<< (m_isBlockingSocket?"non-blocking": "blocking")
+            << "\n is active: " << m_in_active
+            << " socket" << std::endl;
+    }
+};
 
 class simple_server
 {
@@ -27,6 +39,7 @@ private:
     fd_set m_exception;
     int m_port;
     Block m_isBlockingSocket;
+    std::map<int,client_connection> m_clients;
 public:
     simple_server(int port, Block isBlocking)
         : m_port(port), m_time_val{1,0}, m_isBlockingSocket(isBlocking) {};

@@ -111,7 +111,6 @@ int simple_server::Init()
 
             if (FD_ISSET(sock, &m_exception))
             {
-                /* code */
             }
 
             if (FD_ISSET(sock, &m_write))
@@ -121,7 +120,16 @@ int simple_server::Init()
 
             if (FD_ISSET(sock, &m_read))
             {
-                /* code */
+                socklen_t len = sizeof(struct sockaddr);
+                int client_socket = accept(sock, nullptr, &len);
+                if (client_socket > 0)
+                {
+                    std::cout << "Connection established with address ####" << std::endl;
+                    m_clients[client_socket] = client_connection{true};
+                    m_clients[client_socket].print();
+                    send(client_socket, "connection to server successful", 32, 0);
+                    break;
+                }
             }
         }
         else if (ret == 0)
