@@ -49,4 +49,6 @@ public:
     int InitSocket(int sock);
 
     void Send();
+
+    void ProcessClientMsg(int socket);
 };

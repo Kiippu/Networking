@@ -125,35 +125,35 @@ int simple_server::Init()
                 {
                     std::cout << "Connection established with address ####" << std::endl;
                     m_clients[client_socket] = client_connection{true};
-                    m_clients[client_socket].print();
+                    //m_clients[client_socket].print();
                     send(client_socket, "connection to server successful", 32, 0);
-                    break;
+                    //break;
                 }
             }
-            else
-            {
-                for ( auto [port, obj] : m_clients)
-                {
-                    if (FD_ISSET(port, &m_read))
-                    {
-                        // process the clients message
-                    }
-                }
-            }
-            
-        }
-        else if (ret == 0)
-        {
-            // we have no communications on our sockets so sleep for 2 seconds
-            std::cout << "we have no communications on our sockets.. " << std::endl;
-            sleep(2);
         }
         else
         {
-            // we have an error in our socket setup
-            std::cout << "we have an error in our socket setup. " << std::endl;
-            break;
+            for ( auto [port, obj] : m_clients)
+            {
+                if (FD_ISSET(port, &m_read))
+                {
+                    // process the clients message
+                    ProcessClientMsg(port);
+                }
+            }
         }
+        // else if (ret == 0)
+        // {
+        //     // we have no communications on our sockets so sleep for 2 seconds
+        //     std::cout << "we have no communications on our sockets.. " << std::endl;
+        //     sleep(2);
+        // }
+        // else
+        // {
+        //     // we have an error in our socket setup
+        //     std::cout << "we have an error in our socket setup. " << std::endl;
+        //     break;
+        // }
         
 
 
@@ -198,3 +198,29 @@ int simple_server::InitSocket(int sock)
      */
     return select( max_sock, &m_read, &m_write, &m_exception, &m_time_val);
 }
+
+
+    void simple_server::ProcessClientMsg(int socket)
+    {
+        char buff[255] = {0,};
+        int ret = recv(socket, buff, 256, 0);
+        if (ret < 0)
+        {
+            close(socket);
+            for( auto [port, obj] : m_clients)
+            {
+                if(port == socket)
+                {
+                    m_clients.erase(port);
+                }
+            }
+        }
+        else
+        {
+            std::cout << std::endl << "client sent: \n" << buff << std::endl;
+            send(socket, "processed your request", 23, 0 );
+            std::cout << std::endl << "*****************************************" << std::endl;
+        }
+        
+        
+    }
