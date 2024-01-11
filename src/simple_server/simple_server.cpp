@@ -115,7 +115,6 @@ int simple_server::Init()
 
             if (FD_ISSET(sock, &m_write))
             {
-                /* code */
             }
 
             if (FD_ISSET(sock, &m_read))
@@ -131,6 +130,17 @@ int simple_server::Init()
                     break;
                 }
             }
+            else
+            {
+                for ( auto [port, obj] : m_clients)
+                {
+                    if (FD_ISSET(port, &m_read))
+                    {
+                        // process the clients message
+                    }
+                }
+            }
+            
         }
         else if (ret == 0)
         {
@@ -169,6 +179,13 @@ int simple_server::InitSocket(int sock)
 
     // get max socket
     auto max_sock = sock + 1;
+
+    for ( auto [port, obj] : m_clients)
+    {
+        FD_SET(port, &m_read);
+        FD_SET(port, &m_exception);
+    }
+    
 
     /**
      * @brief check if socket arrays are ready to be read
